@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Fees - Havenedge</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<nav id="mainNav"></nav>
+
+<div class="container">
+    <div class="card admin fade-in">
+        <h3>Record Payment</h3>
+        <input type="text" placeholder="Student Name" style="padding:10px; width:200px; border:1px solid var(--border); border-radius:6px;">
+        <input type="number" placeholder="Amount" style="padding:10px; width:150px; border:1px solid var(--border); border-radius:6px;">
+        <button class="btn-primary">Add Transaction</button>
+    </div>
+
+    <div class="stats-grid fade-in">
+        <div class="card"><h3>₹12.5L</h3><p>Total Revenue</p></div>
+        <div class="card"><h3>₹1.7L</h3><p>Pending</p></div>
+    </div>
+
+    <div class="card fade-in">
+        <h3>Payment Records</h3>
+        <table>
+            <tr><th>Date</th><th>Student</th><th>Amount</th><th>Status</th></tr>
+            <tr><td>Mar 12, 2026</td><td>Anita</td><td>₹7,500</td><td><b style="color:green">Paid</b></td></tr>
+            <tr><td>Mar 10, 2026</td><td>Vikram</td><td>₹7,500</td><td><b style="color:red">Pending</b></td></tr>
+        </table>
+    </div>
+</div>
+
+<script src="auth.js"></script>
+</body>
+</html>

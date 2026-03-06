@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Complaints - Havenedge</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<nav id="mainNav"></nav>
+
+<div class="container">
+    <div class="card student fade-in">
+        <h3>Submit New Complaint</h3>
+        <div style="display:grid; grid-template-columns: 1fr 1fr; gap:15px; margin-top:15px;">
+            <input type="text" placeholder="Name" style="padding:10px; border-radius:6px; border:1px solid var(--border);">
+            <select style="padding:10px; border-radius:6px; border:1px solid var(--border);">
+                <option>Maintenance</option><option>Electrical</option><option>Wifi</option>
+            </select>
+        </div>
+        <textarea placeholder="Describe the issue..." style="width:100%; margin-top:15px; padding:10px; height:80px; border-radius:6px; border:1px solid var(--border);"></textarea>
+        <button class="btn-primary" style="margin-top:10px;">Submit Ticket</button>
+    </div>
+
+    <div class="card fade-in">
+        <h3>Recent Tickets</h3>
+        <table>
+            <tr><th>Student</th><th>Category</th><th>Status</th><th>Action</th></tr>
+            <tr>
+                <td>Rahul</td><td>Electrical</td>
+                <td><span style="color:orange">In Progress</span></td>
+                <td><select class="warden admin" onchange="alert('Status Updated')"><option>Open</option><option selected>In Progress</option><option>Resolved</option></select></td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+<script src="auth.js"></script>
+</body>
+</html>

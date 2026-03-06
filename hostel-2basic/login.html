@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login - Havenedge</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body { height: 100vh; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #0f172a 0%, #2563eb 100%); }
+        .login-box { width: 380px; text-align: center; }
+        select, button { width: 100%; padding: 12px; margin-top: 15px; border-radius: 8px; }
+    </style>
+</head>
+<body>
+    <div class="card login-box">
+        <h2 style="margin-bottom:10px;">Havenedge Portal</h2>
+        <p style="color:#64748b; font-size:14px;">Please select your role to enter</p>
+        <select id="role">
+            <option value="">-- Choose Role --</option>
+            <option value="admin">Administrator</option>
+            <option value="warden">Warden</option>
+            <option value="student">Student</option>
+        </select>
+        <button class="btn-primary" onclick="login()" style="width:100%; margin-top:20px;">Sign In</button>
+    </div>
+
+    <script>
+        function login(){
+            const role = document.getElementById("role").value;
+            if(!role) return alert("Please select a role");
+            localStorage.setItem("role", role);
+            window.location.href = "dashboard.html";
+        }
+    </script>
+</body>
+</html>
