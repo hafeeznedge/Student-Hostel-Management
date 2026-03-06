@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Hostel FAQs</title>
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 40px;
+        background: #f5f5f5;
+        color: #222;
+    }
+
+    h1 {
+        text-align: center;
+        font-size: 32px;
+        margin-bottom: 40px;
+    }
+
+    .faq-wrapper {
+        max-width: 900px;
+        margin: auto;
+    }
+
+    .faq-box {
+        background: #fff;
+        padding: 20px 24px;
+        margin-bottom: 18px;
+        border-radius: 10px;
+        box-shadow: 0px 2px 8px rgba(0,0,0,0.07);
+        transition: 0.3s;
+    }
+
+    .faq-box:hover {
+        box-shadow: 0px 4px 14px rgba(0,0,0,0.12);
+    }
+
+    .faq-question {
+        font-weight: bold;
+        font-size: 18px;
+        color: #222;
+        margin-bottom: 6px;
+    }
+
+    .faq-answer {
+        color: #555;
+        font-size: 16px;
+        line-height: 1.6;
+    }
+
+    .back-home {
+        display: block;
+        width: fit-content;
+        margin: 40px auto 0;
+        background: #111;
+        padding: 12px 25px;
+        color: #fff;
+        border-radius: 6px;
+        text-decoration: none;
+        font-weight: bold;
+        transition: 0.3s;
+    }
+
+    .back-home:hover {
+        background: #333;
+    }
+    body.dark{
+background:#111 !important;
+color:#f4f6f9 !important;
+}
+
+body.dark .box{
+background:#1e1e1e !important;
+color:#f4f6f9 !important;
+box-shadow:0 4px 20px rgba(0,0,0,0.3) !important;
+}
+
+body.dark table th{
+background:#222 !important;
+}
+</style>
+
+</head>
+<body>
+<nav style="display:flex;justify-content:space-between;align-items:center;padding:18px 8%;background:#111;color:#fff;">
+<h2 style="font-weight:600;">Havenedge Hostel</h2>
+<ul style="list-style:none;display:flex;gap:25px;align-items:center;margin:0;">
+<li class="admin" ><a href="index.html" style="text-decoration:none;color:#fff;font-size:14px;">Home</a></li>
+<li class="admin warden" ><a href="rooms.html" style="text-decoration:none;color:#fff;font-size:14px;">Room Allocation</a></li>
+<li class="admin student"><a href="fees.html" style="text-decoration:none;color:#fff;font-size:14px;">Fee Tracking</a></li>
+<li class="admin warden student"><a href="complaints.html" style="text-decoration:none;color:#fff;font-size:14px;">Complaints</a></li>
+<li class="admin warden" ><a href="visitors.html" style="text-decoration:none;color:#fff;font-size:14px;">Visitors</a></li>
+<li class="admin"><a href="faqs.html" style="text-decoration:none;color:#fff;font-size:14px;">FAQs</a></li>
+<li class="admin warden student" ><button onclick="logout()">Logout</button></li>
+<li><button onclick="toggleMode()" style="background:#fff;color:#111;border:none;padding:6px 12px;font-size:13px;border-radius:6px;cursor:pointer;">Toggle</button></li>
+</ul>
+</nav>
+<h1>Hostel Frequently Asked Questions</h1>
+
+<div class="faq-wrapper">
+
+    <div class="faq-box">
+        <div class="faq-question">How are rooms allocated to students?</div>
+        <div class="faq-answer">
+            Rooms are allocated based on availability, student preferences, and hostel policies. 
+            Allocation is managed through the Room Allocation system to ensure transparency.
+        </div>
+    </div>
+
+    <div class="faq-box">
+        <div class="faq-question">What are the hostel fee payment options?</div>
+        <div class="faq-answer">
+            Students can pay hostel fees monthly, quarterly, or annually. 
+            Payments can be made through approved online or offline methods.
+        </div>
+    </div>
+
+    <div class="faq-box">
+        <div class="faq-question">How can I submit a maintenance complaint?</div>
+        <div class="faq-answer">
+            Complaints can be submitted through the Complaint Management page. 
+            Once submitted, the issue is tracked until it is resolved by the hostel administration.
+        </div>
+    </div>
+
+    <div class="faq-box">
+        <div class="faq-question">Are visitors allowed in the hostel?</div>
+        <div class="faq-answer">
+            Yes, visitors are allowed during designated visiting hours. 
+            All visitors must be registered in the Visitor Entry Log for security purposes.
+        </div>
+    </div>
+
+    <div class="faq-box">
+        <div class="faq-question">What facilities are provided in the hostel?</div>
+        <div class="faq-answer">
+            Facilities typically include furnished rooms, Wi-Fi, electricity, water supply, 
+            security services, housekeeping, and common recreational areas.
+        </div>
+    </div>
+
+    <div class="faq-box">
+        <div class="faq-question">What happens if hostel fees are delayed?</div>
+        <div class="faq-answer">
+            Delayed payments may result in late fees or temporary restrictions 
+            until the outstanding balance is cleared.
+        </div>
+    </div>
+
+    <div class="faq-box">
+        <div class="faq-question">Can I request a room change?</div>
+        <div class="faq-answer">
+            Yes, room change requests can be submitted to the hostel administration 
+            and will be considered based on availability and valid reasons.
+        </div>
+    </div>
+
+    <div class="faq-box">
+        <div class="faq-question">How is hostel security maintained?</div>
+        <div class="faq-answer">
+            Security is maintained through visitor logs, surveillance systems, 
+            entry monitoring, and on-site security staff.
+        </div>
+    </div>
+
+</div>
+
+<a href="index.html" class="back-home">⬅ Back to Home</a>
+<script>
+function toggleMode(){
+document.body.classList.toggle("dark");
+}
+</script>
+
+<script>
+const role = localStorage.getItem("role");
+
+if(!role){
+window.location.href = "login.html";
+}
+
+/* Detect page */
+let currentPage = window.location.pathname.split("/").pop();
+
+if(currentPage === "" || currentPage === "/"){
+currentPage = "index.html";
+}
+
+/* Role Access Rules */
+const access = {
+admin: ["index.html","dashboard.html","rooms.html","fees.html","complaints.html","visitors.html","reports.html"],
+warden: ["index.html","dashboard.html","rooms.html","complaints.html","visitors.html"],
+student: ["index.html","complaints.html","fees.html","faqs.html"]
+};
+
+/* Access Check */
+if(!access[role].includes(currentPage)){
+alert("Access Denied!");
+window.location.href = "dashboard.html";
+}
+</script>
+
+<script>
+const userRole = localStorage.getItem("role");
+
+document.querySelectorAll("nav li").forEach(item=>{
+if(!item.classList.contains(userRole)){
+item.style.display="none";
+}
+});
+</script>
+<script>
+function logout(){
+localStorage.removeItem("role");
+window.location.href="login.html";
+}
+</script>
+</body>
+</html>

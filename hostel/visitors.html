@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Visitor Entry Logs</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+<style>
+
+body{
+font-family:Poppins;
+background:#f4f6f9;
+padding:40px;
+transition:0.3s;
+}
+
+nav{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:18px 8%;
+background:#111;
+color:#fff;
+margin:-40px -40px 40px -40px;
+}
+
+nav ul{
+list-style:none;
+display:flex;
+gap:25px;
+align-items:center;
+margin:0;
+}
+
+nav ul li a{
+text-decoration:none;
+color:#fff;
+font-size:14px;
+}
+
+.active-link{
+border-bottom:2px solid #fff;
+padding-bottom:3px;
+}
+
+body.dark{
+background:#111 !important;
+color:#f4f6f9 !important;
+}
+
+body.dark .box{
+background:#1e1e1e !important;
+color:#f4f6f9 !important;
+box-shadow:0 4px 20px rgba(0,0,0,0.3) !important;
+}
+
+body.dark table th{
+background:#222 !important;
+}
+
+h1{
+text-align:center;
+margin-bottom:40px;
+}
+
+.box{
+background:#fff;
+padding:25px;
+border-radius:8px;
+box-shadow:0 4px 15px rgba(0,0,0,0.05);
+margin-bottom:40px;
+}
+
+input{
+width:100%;
+padding:10px;
+margin:10px 0;
+border:1px solid #ddd;
+border-radius:5px;
+}
+
+button{
+background:#111;
+color:#fff;
+padding:10px 20px;
+border:none;
+border-radius:5px;
+cursor:pointer;
+}
+
+.stats{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+gap:25px;
+margin-bottom:50px;
+}
+
+.stat-card{
+background:#fff;
+padding:25px;
+border-radius:8px;
+box-shadow:0 4px 15px rgba(0,0,0,0.05);
+text-align:center;
+transition:0.3s;
+}
+
+.stat-card:hover{
+transform:translateY(-5px);
+}
+
+.stat-card h2{
+font-size:28px;
+margin-bottom:10px;
+}
+
+body.dark .stat-card{
+background:#1e1e1e;
+}
+
+table{
+width:100%;
+border-collapse:collapse;
+}
+
+th,td{
+padding:12px;
+border-bottom:1px solid #eee;
+}
+
+th{
+background:#f0f0f0;
+}
+
+.status-inside{color:#2ecc71;font-weight:600;}
+.status-exit{color:#e74c3c;font-weight:600;}
+
+.fade-in{
+opacity:0;
+transform:translateY(30px);
+transition:all 0.8s ease;
+}
+
+.fade-in.show{
+opacity:1;
+transform:translateY(0);
+}
+
+</style>
+</head>
+<body>
+
+<nav>
+<h2>Havenedge Hostel</h2>
+<ul>
+<li class="admin"><a href="dashboard.html">Dashboard</a></li>
+<li class="admin warden"><a href="rooms.html">Rooms</a></li>
+<li class="admin student"><a href="fees.html">Fees</a></li>
+<li class="admin warden student"><a href="complaints.html">Complaints</a></li>
+<li class="admin warden"><a href="visitors.html">Visitors</a></li>
+<li class="admin"><a href="reports.html">Reports</a></li>
+<li class="admin warden student" ><button onclick="logout()">Logout</button></li>
+<li><button onclick="toggleMode()" style="background:#fff;color:#111;border:none;padding:6px 12px;border-radius:6px;">Toggle</button></li>
+</ul>
+</nav>
+
+<h1>Visitor Entry Management</h1>
+
+<div class="box">
+<h3>Log Visitor</h3>
+<input type="text" placeholder="Visitor Name">
+<input type="text" placeholder="Student Visiting">
+<input type="datetime-local">
+<button>Log Entry</button>
+</div>
+
+<div class="fade-in">
+<h2>Visitor Overview</h2>
+<div class="stats">
+<div class="stat-card"><h2>1,245</h2><p>Total Visitors (2026)</p></div>
+<div class="stat-card"><h2>38</h2><p>Visitors Today</p></div>
+<div class="stat-card"><h2>12</h2><p>Currently Inside</p></div>
+<div class="stat-card"><h2>3</h2><p>Security Alerts</p></div>
+</div>
+</div>
+
+<div class="box fade-in">
+<h3>Recent Visitor Logs</h3>
+<table>
+<tr>
+<th>Date</th>
+<th>Visitor</th>
+<th>Student</th>
+<th>Time In</th>
+<th>Status</th>
+<th>Update</th>
+</tr>
+<tr>
+<td>12 Mar 2026</td>
+<td>Mr. Sharma</td>
+<td>Rahul</td>
+<td>10:15 AM</td>
+<td class="status-inside">Inside</td>
+<td>
+<select onchange="updateVisitorStatus(this)">
+<option selected>Inside</option>
+<option>Exited</option>
+</select>
+</td>
+</tr>
+<tr>
+<td>12 Mar 2026</td>
+<td>Mrs. Verma</td>
+<td>Anita</td>
+<td>09:30 AM</td>
+<td class="status-exit">Exited</td>
+<td>
+<select onchange="updateVisitorStatus(this)">
+<option>Inside</option>
+<option selected>Exited</option>
+</select>
+</td>
+</tr>
+</table>
+</div>
+
+<div class="box fade-in">
+<h3>Security Guidelines</h3>
+<p>✔ Visitors must carry a valid government ID.</p>
+<p>✔ Entry allowed only during visiting hours (9 AM – 7 PM).</p>
+<p>✔ Visitors must sign the digital log register.</p>
+<p>✔ Maximum visit duration: 2 hours.</p>
+<p>✔ Hostel authority reserves right to deny entry if required.</p>
+</div>
+
+<div class="box fade-in">
+<h3>Verification Checklist</h3>
+<p>✔ ID Verified</p>
+<p>✔ Student Permission Confirmed</p>
+<p>✔ Entry Time Recorded</p>
+<p>✔ Exit Time Updated</p>
+</div>
+
+<script>
+function toggleMode(){
+document.body.classList.toggle("dark");
+}
+
+function updateVisitorStatus(select){
+let status = select.value;
+let statusCell = select.parentElement.previousElementSibling;
+
+if(status==="Inside"){
+statusCell.innerText="Inside";
+statusCell.className="status-inside";
+}else{
+statusCell.innerText="Exited";
+statusCell.className="status-exit";
+}
+}
+
+/* Fade animation */
+const elements = document.querySelectorAll(".fade-in");
+window.addEventListener("scroll",()=>{
+elements.forEach(el=>{
+const position = el.getBoundingClientRect().top;
+if(position < window.innerHeight - 100){
+el.classList.add("show");
+}
+});
+});
+</script>
+<script>
+const role = localStorage.getItem("role");
+
+if(!role){
+window.location.href = "login.html";
+}
+
+/* Detect page */
+let currentPage = window.location.pathname.split("/").pop();
+
+if(currentPage === "" || currentPage === "/"){
+currentPage = "index.html";
+}
+
+/* Role Access Rules */
+const access = {
+admin: ["index.html","dashboard.html","rooms.html","fees.html","complaints.html","visitors.html","reports.html"],
+warden: ["index.html","dashboard.html","rooms.html","complaints.html","visitors.html"],
+student: ["index.html","complaints.html","fees.html","faqs.html"]
+};
+
+/* Access Check */
+if(!access[role].includes(currentPage)){
+alert("Access Denied!");
+window.location.href = "dashboard.html";
+}
+</script>
+
+<script>
+const userRole = localStorage.getItem("role");
+
+document.querySelectorAll("nav li").forEach(item=>{
+if(!item.classList.contains(userRole)){
+item.style.display="none";
+}
+});
+</script>
+<script>
+function logout(){
+localStorage.removeItem("role");
+window.location.href="login.html";
+}
+</script>
+</body>
+</html>

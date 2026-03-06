@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>System Reports</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+
+<style>
+body{
+font-family:Poppins;
+margin:0;
+background:#f4f6f9;
+transition:0.3s;
+}
+
+body.dark{
+background:#111 !important;
+color:#f4f6f9 !important;
+}
+
+nav{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:18px 8%;
+background:#111;
+color:#fff;
+position:sticky;
+top:0;
+z-index:1000;
+}
+
+nav ul{
+list-style:none;
+display:flex;
+gap:25px;
+align-items:center;
+margin:0;
+}
+
+nav a{
+text-decoration:none;
+color:#fff;
+font-size:14px;
+}
+
+nav a.active{
+border-bottom:2px solid #fff;
+padding-bottom:4px;
+}
+
+button{
+background:#fff;
+color:#111;
+border:none;
+padding:6px 12px;
+font-size:13px;
+border-radius:6px;
+cursor:pointer;
+}
+
+h1{
+text-align:center;
+margin:40px 0;
+}
+
+.report-box{
+background:#fff;
+margin:20px 8%;
+padding:30px;
+border-radius:10px;
+box-shadow:0 4px 15px rgba(0,0,0,0.05);
+transition:0.3s;
+}
+
+body.dark .report-box{
+background:#1e1e1e;
+}
+
+.report-box:hover{
+transform:translateY(-5px);
+}
+
+.fade-in{
+opacity:0;
+transform:translateY(30px);
+transition:all 0.8s ease;
+}
+
+.fade-in.show{
+opacity:1;
+transform:translateY(0);
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+<h2>Havenedge Hostel</h2>
+<ul>
+<li class="admin"><a href="dashboard.html">Dashboard</a></li>
+<li class="admin warden"><a href="rooms.html">Rooms</a></li>
+<li class="admin student"><a href="fees.html">Fees</a></li>
+<li class="admin warden student"><a href="complaints.html">Complaints</a></li>
+<li class="admin warden"><a href="visitors.html">Visitors</a></li>
+<li class="admin"><a href="reports.html">Reports</a></li>
+<li class="admin warden student" ><button onclick="logout()">Logout</button></li>
+<li><button onclick="toggleMode()">Toggle</button></li>
+</ul>
+</nav>
+
+<h1>System Reports & Analytics</h1>
+
+<div class="report-box fade-in">
+<h3>Monthly Fee Collection Report</h3>
+<p>January 2026: ₹4,20,000</p>
+<p>February 2026: ₹4,55,000</p>
+<p>March 2026: ₹4,85,000</p>
+</div>
+
+<div class="report-box fade-in">
+<h3>Room Occupancy Report</h3>
+<p>Total Rooms: 300</p>
+<p>Occupied: 285</p>
+<p>Vacant: 15</p>
+</div>
+
+<div class="report-box fade-in">
+<h3>Complaint Analysis</h3>
+<p>Resolved Complaints: 120</p>
+<p>Pending Complaints: 12</p>
+<p>Average Resolution Time: 2 Days</p>
+</div>
+
+<div class="report-box fade-in">
+<h3>Visitor Statistics</h3>
+<p>Total Visitors (2026): 1,245</p>
+<p>Highest Visitor Day: 38 Visitors</p>
+<p>Average Daily Visitors: 22</p>
+</div>
+<div class="report-box fade-in">
+<h3>Yearly Revenue Overview (2026)</h3>
+<p>Q1 Revenue: ₹13,60,000</p>
+<p>Q2 Revenue: ₹14,25,000</p>
+<p>Q3 Revenue: ₹15,10,000</p>
+<p>Q4 Revenue (Projected): ₹16,00,000</p>
+</div>
+
+<div class="report-box fade-in">
+<h3>Block-wise Occupancy</h3>
+<p>Block A: 98% Occupied</p>
+<p>Block B: 94% Occupied</p>
+<p>Block C: 90% Occupied</p>
+<p>Block D: 88% Occupied</p>
+</div>
+
+<div class="report-box fade-in">
+<h3>Complaint Category Analysis</h3>
+<p>Plumbing Issues: 35%</p>
+<p>Electrical Issues: 25%</p>
+<p>Cleanliness: 20%</p>
+<p>Security Concerns: 10%</p>
+<p>Other: 10%</p>
+</div>
+
+<div class="report-box fade-in">
+<h3>Security Monitoring Summary</h3>
+<p>Total CCTV Cameras Active: 24</p>
+<p>Security Staff On Duty: 6</p>
+<p>Incidents Reported This Month: 2</p>
+<p>Visitor Entry Compliance Rate: 100%</p>
+</div>
+
+
+<script>
+function toggleMode(){
+document.body.classList.toggle("dark");
+}
+
+const elements = document.querySelectorAll(".fade-in");
+window.addEventListener("scroll",()=>{
+elements.forEach(el=>{
+const position = el.getBoundingClientRect().top;
+if(position < window.innerHeight - 100){
+el.classList.add("show");
+}
+});
+});
+</script>
+<script>
+const role = localStorage.getItem("role");
+
+if(!role){
+window.location.href = "login.html";
+}
+
+/* Detect page */
+let currentPage = window.location.pathname.split("/").pop();
+
+if(currentPage === "" || currentPage === "/"){
+currentPage = "index.html";
+}
+
+/* Role Access Rules */
+const access = {
+admin: ["index.html","dashboard.html","rooms.html","fees.html","complaints.html","visitors.html","reports.html"],
+warden: ["index.html","dashboard.html","rooms.html","complaints.html","visitors.html"],
+student: ["index.html","complaints.html","fees.html","faqs.html"]
+};
+
+/* Access Check */
+if(!access[role].includes(currentPage)){
+alert("Access Denied!");
+window.location.href = "dashboard.html";
+}
+</script>
+
+<script>
+const userRole = localStorage.getItem("role");
+
+document.querySelectorAll("nav li").forEach(item=>{
+if(!item.classList.contains(userRole)){
+item.style.display="none";
+}
+});
+</script>
+<script>
+function logout(){
+localStorage.removeItem("role");
+window.location.href="login.html";
+}
+</script>
+</body>
+</html>

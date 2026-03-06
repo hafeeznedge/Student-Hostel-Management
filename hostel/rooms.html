@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Room Allocation</title>
+<link rel="stylesheet" href="style.css">
+<script defer src="script.js"></script>
+
+<style>
+body.dark{
+background:#111 !important;
+color:#f4f6f9 !important;
+}
+
+body.dark footer{
+background:#0f172a !important;
+}
+
+/* ====== NEW PREMIUM ADDITIONS ====== */
+
+.info-section{
+padding:60px 8%;
+}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:30px;
+margin-top:40px;
+}
+
+.card{
+background:#fff;
+padding:25px;
+border-radius:10px;
+box-shadow:0 4px 20px rgba(0,0,0,0.05);
+transition:0.3s ease;
+}
+
+.card:hover{
+transform:translateY(-6px);
+}
+
+body.dark .card{
+background:#1e1e1e;
+box-shadow:0 4px 20px rgba(0,0,0,0.4);
+}
+
+.stats{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+gap:20px;
+text-align:center;
+margin-top:40px;
+}
+
+.stat-box{
+background:#fff;
+padding:30px;
+border-radius:10px;
+box-shadow:0 4px 20px rgba(0,0,0,0.05);
+transition:0.3s ease;
+}
+
+.stat-box:hover{
+transform:translateY(-5px);
+}
+
+.stat-box h3{
+font-size:28px;
+margin-bottom:10px;
+}
+
+body.dark .stat-box{
+background:#1e1e1e;
+}
+
+.table-section{
+padding:60px 8%;
+overflow-x:auto;
+}
+
+table{
+width:100%;
+border-collapse:collapse;
+background:#fff;
+box-shadow:0 4px 20px rgba(0,0,0,0.05);
+border-radius:8px;
+overflow:hidden;
+}
+
+th, td{
+padding:14px;
+text-align:left;
+border-bottom:1px solid #eee;
+}
+
+th{
+background:#f4f6f9;
+font-weight:600;
+}
+
+body.dark table{
+background:#1e1e1e;
+}
+
+body.dark th{
+background:#2a2a2a;
+}
+
+.fade-in{
+opacity:0;
+transform:translateY(30px);
+transition:all 0.8s ease;
+}
+
+.fade-in.show{
+opacity:1;
+transform:translateY(0);
+}
+</style>
+
+</head>
+<body>
+
+<header>
+<div class="logo">Hostel Management</div>
+<nav>
+<li class="admin"><a href="dashboard.html">Dashboard</a></li>
+<li class="admin warden"><a href="rooms.html">Rooms</a></li>
+<li class="admin student"><a href="fees.html">Fees</a></li>
+<li class="admin warden student"><a href="complaints.html">Complaints</a></li>
+<li class="admin warden"><a href="visitors.html">Visitors</a></li>
+<li class="admin"><a href="reports.html">Reports</a></li>
+<li class="admin warden student" ><button onclick="logout()">Logout</button></li>
+<button class="toggle-btn" onclick="toggleMode()">Toggle</button>
+</nav>
+</header>
+
+<section class="section">
+<h2>Room Allocation Form</h2>
+<form>
+<input type="text" placeholder="Student Full Name" required>
+<input type="text" placeholder="Student ID" required>
+<select>
+<option>Select Room Type</option>
+<option>Single Sharing</option>
+<option>Double Sharing</option>
+<option>Triple Sharing</option>
+</select>
+<select>
+<option>Select Block</option>
+<option>A Block</option>
+<option>B Block</option>
+<option>C Block</option>
+</select>
+<button class="submit-btn">Allocate Room</button>
+</form>
+</section>
+
+<!-- ===== NEW CONTENT STARTS HERE ===== -->
+
+<section class="info-section fade-in">
+<h2>Room Allocation Overview</h2>
+<p>
+The Room Allocation module ensures a transparent and efficient process for assigning hostel rooms.
+Students are allocated based on availability, room preference, and administrative approval.
+All allocations are digitally recorded for easy monitoring and reporting.
+</p>
+
+<div class="stats">
+<div class="stat-box">
+<h3>220</h3>
+<p>Total Rooms</p>
+</div>
+<div class="stat-box">
+<h3>185</h3>
+<p>Occupied Rooms</p>
+</div>
+<div class="stat-box">
+<h3>35</h3>
+<p>Available Rooms</p>
+</div>
+<div class="stat-box">
+<h3>3</h3>
+<p>Blocks</p>
+</div>
+</div>
+</section>
+
+<section class="info-section fade-in">
+<h2>Room Types & Facilities</h2>
+<div class="grid">
+<div class="card">
+<h3>Single Sharing</h3>
+<p>Private room with study desk, wardrobe, attached bathroom, and Wi-Fi access.</p>
+</div>
+<div class="card">
+<h3>Double Sharing</h3>
+<p>Shared room for two students with individual storage and common facilities.</p>
+</div>
+<div class="card">
+<h3>Triple Sharing</h3>
+<p>Spacious room shared by three students with balanced comfort and affordability.</p>
+</div>
+</div>
+</section>
+
+<section class="table-section fade-in">
+<h2>Current Room Availability</h2>
+<table>
+<tr>
+<th>Block</th>
+<th>Room Type</th>
+<th>Total</th>
+<th>Available</th>
+<th>Status</th>
+</tr>
+<tr>
+<td>A Block</td>
+<td>Single</td>
+<td>40</td>
+<td>5</td>
+<td>Limited</td>
+</tr>
+<tr>
+<td>B Block</td>
+<td>Double</td>
+<td>80</td>
+<td>12</td>
+<td>Open</td>
+</tr>
+<tr>
+<td>C Block</td>
+<td>Triple</td>
+<td>100</td>
+<td>18</td>
+<td>Open</td>
+</tr>
+</table>
+</section>
+
+<section class="info-section fade-in">
+<h2>Allocation Guidelines</h2>
+<div class="grid">
+<div class="card">
+<p>✔ Rooms are allocated on a first-come, first-served basis.</p>
+</div>
+<div class="card">
+<p>✔ Students must complete fee payment before final confirmation.</p>
+</div>
+<div class="card">
+<p>✔ Room changes require administrative approval.</p>
+</div>
+<div class="card">
+<p>✔ Damage charges apply as per hostel policy.</p>
+</div>
+</div>
+</section>
+
+<footer>
+© 2026 HostelPro Management System
+</footer>
+
+<script>
+function toggleMode(){
+document.body.classList.toggle("dark");
+}
+
+/* Fade animation */
+const elements = document.querySelectorAll(".fade-in");
+
+window.addEventListener("scroll",()=>{
+elements.forEach(el=>{
+const position = el.getBoundingClientRect().top;
+if(position < window.innerHeight - 100){
+el.classList.add("show");
+}
+});
+});
+</script>
+<script>
+const role = localStorage.getItem("role");
+
+if(!role){
+window.location.href = "login.html";
+}
+
+/* Detect page */
+let currentPage = window.location.pathname.split("/").pop();
+
+if(currentPage === "" || currentPage === "/"){
+currentPage = "index.html";
+}
+
+/* Role Access Rules */
+const access = {
+admin: ["index.html","dashboard.html","rooms.html","fees.html","complaints.html","visitors.html","reports.html"],
+warden: ["index.html","dashboard.html","rooms.html","complaints.html","visitors.html"],
+student: ["index.html","complaints.html","fees.html","faqs.html"]
+};
+
+/* Access Check */
+if(!access[role].includes(currentPage)){
+alert("Access Denied!");
+window.location.href = "dashboard.html";
+}
+</script>
+
+<script>
+const userRole = localStorage.getItem("role");
+
+document.querySelectorAll("nav li").forEach(item=>{
+if(!item.classList.contains(userRole)){
+item.style.display="none";
+}
+});
+</script>
+<script>
+function logout(){
+localStorage.removeItem("role");
+window.location.href="login.html";
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Admin Dashboard</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+
+<style>
+body{
+font-family:Poppins;
+margin:0;
+background:#f4f6f9;
+transition:0.3s;
+}
+
+body.dark{
+background:#111 !important;
+color:#f4f6f9 !important;
+}
+
+nav{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:18px 8%;
+background:#111;
+color:#fff;
+position:sticky;
+top:0;
+z-index:1000;
+}
+
+nav ul{
+list-style:none;
+display:flex;
+gap:25px;
+align-items:center;
+margin:0;
+}
+
+nav a{
+text-decoration:none;
+color:#fff;
+font-size:14px;
+}
+
+nav a.active{
+border-bottom:2px solid #fff;
+padding-bottom:4px;
+}
+
+button{
+background:#fff;
+color:#111;
+border:none;
+padding:6px 12px;
+font-size:13px;
+border-radius:6px;
+cursor:pointer;
+}
+
+h1{
+text-align:center;
+margin:40px 0;
+}
+
+.dashboard-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:30px;
+padding:0 8% 60px;
+}
+
+.card{
+background:#fff;
+padding:30px;
+border-radius:10px;
+box-shadow:0 4px 15px rgba(0,0,0,0.05);
+transition:0.3s;
+text-align:center;
+}
+
+.card:hover{
+transform:translateY(-6px);
+}
+
+.card h2{
+font-size:30px;
+margin-bottom:10px;
+}
+
+body.dark .card{
+background:#1e1e1e;
+}
+
+.fade-in{
+opacity:0;
+transform:translateY(30px);
+transition:all 0.8s ease;
+}
+
+.fade-in.show{
+opacity:1;
+transform:translateY(0);
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+<h2>Havenedge Hostel</h2>
+<ul>
+<li class="admin"><a href="dashboard.html">Dashboard</a></li>
+<li class="admin warden"><a href="rooms.html">Rooms</a></li>
+<li class="admin student"><a href="fees.html">Fees</a></li>
+<li class="admin warden student"><a href="complaints.html">Complaints</a></li>
+<li class="admin warden"><a href="visitors.html">Visitors</a></li>
+<li class="admin"><a href="reports.html">Reports</a></li>
+<li class="admin warden student" ><button onclick="logout()">Logout</button></li>
+<li><button onclick="toggleMode()">Toggle</button></li>
+</ul>
+</nav>
+
+<h1>Admin Control Dashboard</h1>
+
+<div class="dashboard-grid fade-in">
+
+<div class="card">
+<h2>320</h2>
+<p>Total Students</p>
+</div>
+
+<div class="card">
+<h2>285</h2>
+<p>Rooms Occupied</p>
+</div>
+
+<div class="card">
+<h2>₹4,85,000</h2>
+<p>Fees Collected</p>
+</div>
+
+<div class="card">
+<h2>12</h2>
+<p>Pending Complaints</p>
+</div>
+
+<div class="card">
+<h2>38</h2>
+<p>Visitors Today</p>
+</div>
+
+<div class="card">
+<h2>95%</h2>
+<p>Occupancy Rate</p>
+</div>
+
+</div>
+
+<div class="box fade-in" style="margin:40px 8%;">
+<h3>Recent System Activities</h3>
+<p>✔ New student Rahul Kumar allocated Room A-203</p>
+<p>✔ Fee payment received from Anita (₹18,000)</p>
+<p>✔ Complaint resolved: Water leakage in Block B</p>
+<p>✔ Visitor entry logged for Mr. Sharma</p>
+<p>✔ Room A-105 marked as vacant</p>
+</div>
+
+<div class="box fade-in" style="margin:40px 8%;">
+<h3>Fee Payment Status</h3>
+<table style="width:100%;border-collapse:collapse;">
+<tr>
+<th style="padding:12px;border-bottom:1px solid #eee;">Student</th>
+<th style="padding:12px;border-bottom:1px solid #eee;">Room</th>
+<th style="padding:12px;border-bottom:1px solid #eee;">Status</th>
+</tr>
+<tr>
+<td style="padding:12px;">Rahul</td>
+<td style="padding:12px;">A-203</td>
+<td style="padding:12px;color:#2ecc71;font-weight:600;">Paid</td>
+</tr>
+<tr>
+<td style="padding:12px;">Anita</td>
+<td style="padding:12px;">B-101</td>
+<td style="padding:12px;color:#e74c3c;font-weight:600;">Pending</td>
+</tr>
+<tr>
+<td style="padding:12px;">Kiran</td>
+<td style="padding:12px;">C-305</td>
+<td style="padding:12px;color:#f39c12;font-weight:600;">Partial</td>
+</tr>
+</table>
+</div>
+
+<div class="box fade-in" style="margin:40px 8%;">
+<h3>Hostel Performance Summary</h3>
+<p>✔ Overall Satisfaction Rate: 92%</p>
+<p>✔ Maintenance Requests This Month: 14</p>
+<p>✔ Average Complaint Resolution Time: 1.8 Days</p>
+<p>✔ Highest Occupancy Block: Block A</p>
+<p>✔ Lowest Vacancy Rate: 5%</p>
+</div>
+
+<script>
+function toggleMode(){
+document.body.classList.toggle("dark");
+}
+
+window.addEventListener("DOMContentLoaded",()=>{
+const elements = document.querySelectorAll(".fade-in");
+elements.forEach(el=>{
+el.classList.add("show");
+});
+});
+</script>
+
+<!-- UPDATED ACCESS SCRIPT -->
+<script>
+const role = localStorage.getItem("role");
+
+if(!role){
+window.location.href = "login.html";
+}
+
+/* Detect page */
+let currentPage = window.location.pathname.split("/").pop();
+
+if(currentPage === "" || currentPage === "/"){
+currentPage = "index.html";
+}
+
+/* Role Access Rules */
+const access = {
+admin: ["index.html","dashboard.html","rooms.html","fees.html","complaints.html","visitors.html","reports.html"],
+warden: ["index.html","dashboard.html","rooms.html","complaints.html","visitors.html"],
+student: ["index.html","complaints.html","fees.html","faqs.html"]
+};
+
+/* Access Check */
+if(!access[role].includes(currentPage)){
+alert("Access Denied!");
+window.location.href = "dashboard.html";
+}
+</script>
+
+<script>
+const userRole = localStorage.getItem("role");
+
+document.querySelectorAll("nav li").forEach(item=>{
+if(!item.classList.contains(userRole)){
+item.style.display="none";
+}
+});
+</script>
+
+<script>
+function logout(){
+localStorage.removeItem("role");
+window.location.href="login.html";
+}
+</script>
+
+</body>
+</html>
